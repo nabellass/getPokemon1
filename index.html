@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pikachu</title>
+    <style>
+        .pokemon {
+            text-align: center;
+            margin: auto;
+            background-color: yellow;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get Pikachu!</h1>
+    <button type="button">Get!</button>
+    <div class="pokemon">
+        <!--tempat untuk menampilkan data-->
+    </div>
+
+    <script>
+        const searchButton = document.querySelector('button');
+        searchButton.addEventListener('click', function () {
+            fetch('https://pokeapi.co/api/v2/pokemon/25')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector(".pokemon").innerHTML = `
+                <div>
+                    <p>${data.id} : ${data.name}</p>
+                    <img src="${data.sprites.front_female}">
+                    <p>type : ${data.types[0].type.name}</p>
+                </div>`;
+            })
+            .catch(err => {
+                console.log('Pokemon Not Found');
+            })
+            .finally(() => {
+                console.log('Promise telah selesai!');
+            })
+        })
+            
+    </script>
+</body>
+</html>
